@@ -79,11 +79,11 @@ fun_features:
   # 为 subtitle 添加打字机效果
   # Typing animation for subtitle
   typing:
-    enable: false
+    enable: true
 
     # 打印速度，数字越大越慢
     # Typing speed, the larger the number, the slower
-    typeSpeed: 70
+    typeSpeed: 50
 
     # 游标字符
     # Cursor character
@@ -107,7 +107,7 @@ fun_features:
   # 加载进度条
   # Progress bar when loading
   progressbar:
-    enable: false
+    enable: true
     height_px: 3
     color: "#29d"
     # See: https://github.com/rstacruz/nprogress
@@ -294,9 +294,9 @@ navbar:
   # Navigation bar menu. `key` is used to associate languages/*.yml. If there is no association, the value of `key` itself will be displayed; if `icon` is a css class, it can be omitted; adding `name` can force the display of the specified name
   menu:
     - { key: "home", link: "/", icon: "iconfont icon-home-fill" }
-    #- { key: "archive", link: "/archives/", icon: "iconfont icon-archive-fill" }
+    - { key: "archive", link: "/archives/", icon: "iconfont icon-archive-fill" }
     - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
-    #- { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
+    - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
     #- { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
 
@@ -335,7 +335,7 @@ banner:
 # 向下滚动的箭头
 # Scroll down arrow
 scroll_down_arrow:
-  enable: true
+  enable: false
 
   # 头图高度不小于指定比例，才显示箭头
   # Only the height of the banner image is greater than the ratio, the arrow is displayed
@@ -359,11 +359,10 @@ scroll_top_arrow:
 footer:
   # 页脚第一行文字的 HTML，建议保留 Fluid 的链接，用于向更多人推广本主题
   # HTML of the first line of the footer, it is recommended to keep the Fluid link to promote this theme to more people
-  content: '
-    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-    <i class="iconfont icon-love"></i>
-    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
-  '
+  content: ''
+    #<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+    #<i class="iconfont icon-love"></i>
+    #<a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
 
   # 展示网站的 PV、UV 统计数
   # Display website PV and UV statistics
@@ -473,7 +472,7 @@ index:
 # Post Page
 #---------------------------
 post:
-  banner_img: /img/default.png
+  banner_img: /img/defaultbg.jpg
   banner_img_height: 70
   banner_mask_alpha: 0.3
 
@@ -552,7 +551,7 @@ post:
   # 版权声明，会显示在每篇文章的结尾
   # Copyright, will be displayed at the end of each post
   copyright:
-    enable: true
+    enable: false
     content: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！'
 
   # 文章底部上一篇下一篇功能
@@ -739,7 +738,7 @@ twikoo:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /img/default.png
+  banner_img: /img/defaultbg.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -776,7 +775,7 @@ category:
 #---------------------------
 tag:
   enable: false
-  banner_img: /img/default.png
+  banner_img: /img/defaultbg.jpg
   banner_img_height: 80
   banner_mask_alpha: 0.3
   subtitle:
