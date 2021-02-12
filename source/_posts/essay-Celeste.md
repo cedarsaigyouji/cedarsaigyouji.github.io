@@ -1,5 +1,5 @@
 ---
-title: 'essay::”蔚蓝“（celeste）的山'
+title: 'Essay::”蔚蓝“（celeste）的山'
 date: 2021-02-01 20:05:35
 tags: whimsical
 comment: true
