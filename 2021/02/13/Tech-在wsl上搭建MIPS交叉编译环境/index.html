@@ -17,7 +17,7 @@
   <meta name="description" content="真理位於大炮的射程範圍内">
   <meta name="author" content="雾杉cedar">
   <meta name="keywords" content="">
-  <title>Note::庚子备忘录 - 四方喫茶舘</title>
+  <title>Tech::在wsl上搭建MIPS交叉编译环境 - 四方喫茶舘</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Note::庚子备忘录">
+            <span class="h2" id="subtitle" title="Tech::在wsl上搭建MIPS交叉编译环境">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-12 10:17" pubdate>
-        February 12, 2021 am
+      <time datetime="2021-02-13 17:24" pubdate>
+        February 13, 2021 pm
       </time>
     </span>
   
@@ -209,34 +209,32 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Note::庚子备忘录</h1>
+            <h1 style="display: none">Tech::在wsl上搭建MIPS交叉编译环境</h1>
             
             <div class="markdown-body">
-              <blockquote>
-<p>lmy: 在异地过年的时候 就想起你！</p>
-<p>me: 我和朋友聊了一个晚上</p>
-<p>​        没有家 过年的味道会慢慢淡去</p>
-<p>​        逐渐模糊 变成只有一个符号</p>
-</blockquote>
-<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>2020庚子年实在不是一个好年。从年头到年尾都充满了各种各样荒诞无经、无法预知的事件冲突。</p>
-<p>大概从年初开始的疫情爆发，再到之后的项目研究，再到之后的关于科研方向的不断转移，我一直是陷在特别迷茫的状态。</p>
-<p>有时候——不，是很经常，我会不由自主地陷在过往的回忆里面。想起自己的初中，高中，想起自己不知道为什么努力但是每天都在花时间的日子。</p>
-<p>可能在这种情况下的充实感会给我一些心理上的慰藉？但是当决定权真的下到自己手上的时候，我真的愿意为自己所作的决定负责吗。</p>
-<p>这是一个问题，嗯。我一直在想的一个问题。</p>
-<hr>
-<p>有时候和朋友聊天，会发现自己实际上充满了很多致命的弱点。比方说，自负，比方说，关于他人的看法云云。</p>
-<p>我自己对诸如此类的性格深恶痛绝，但是又无法割裂。</p>
-<p>之前在一个半夜和TS聊天，他和我聊了挺多东西，关于如何看待生活，看待自己的所作所为，看待他人对自己的评价。</p>
-<p>我现在确实觉得，年龄越大，能交心的人越来越少了。这是实话。所以有时候碰到像TS这样的好人，我真的觉得特别珍贵。</p>
-<p>不过这段聊天过程也是去年的一个很大的收获。也许成熟并不是一段一段的蜕变，而是重新审视并包容原本的自己。</p>
-<hr>
-<p>庚子年有很多的想法，关于去UCB交换，关于自己的实习，关于自己的科研，关于自己的实习。</p>
-<p>我觉得，如果能把这些事情都搞定，那我真是太厉害了。确实是这样，很朴素的想法。</p>
-<p>不得不说，现在有时候看自己过往的成就，有时候我爸会提醒我：这一切都不是你的成就。在你的所有achievements背后，都有某个人或者某些人在支撑你。或许是你的朋友，你的家人，甚至是你不喜欢的人。他们都会在某个地方，某种意义下给你一剂强心剂，或者给予你非常直接的帮助。</p>
-<p>以前我不相信这句话，可能是因为我过于自负。不过愚蠢与自大往往源于无知，现在我觉得这句话很有道理。</p>
-<p>因此对于以前曾经帮助过我的人，我希望你们都能在新的一年里活得有厚度。当然，我对于自己的生活的看法一直都没有变。我觉得，我很幸运，并且生活很踏实，也很有厚度。</p>
-<p>就这样。诸事顺遂，得偿所愿。</p>
-<p>谨贺新年。</p>
+              <p>年初一晚上吃完饭回来想继续搞自己写了一丁点的MIPS32架构的CPU，看了一下教材想自己搞定一下GNU工具链完成对MIPS32架构汇编的编译。但是昨天把源码下到wsl里面跑了一下发现报错：</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smali">-bash: /home/cedar/GNUworkfile/mips-2014.05/bin/mips-sde-elf-as: cannot<span class="hljs-built_in"> execute </span>binary file: Exec format error<br></code></pre></td></tr></table></figure>
+<p>一拍脑袋，自己的PC是x86架构的，没法对MIPS进行编译。查了一下万能的stackoverflow，给我指了一条死路，让我去下一个ubuntu64 for arm试试看。今天早上起来丢进vmware，果然挂了；vmware也没法搞定arm架构的虚拟机。</p>
+<p>下午甚至试了一下把树莓派装起来看看能不能跑，结果是同样报错。最后试了一下gcc和qemu交叉编译环境搭建，成功了，也是折腾的不行。</p>
+<p>最后想了一下原因，树莓派是64位的，PC也是，但是目标CPU是32位base。</p>
+<h1 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h1><p>先把qemu和配置的binfmt搞定：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">sudo apt install qemu-user-static<br>sudo update-binfmts --install i386 /usr/bin/qemu-i386-static --magic &#x27;<span class="hljs-symbol">\x</span>7fELF<span class="hljs-symbol">\x</span>01<span class="hljs-symbol">\x</span>01<span class="hljs-symbol">\x</span>01<span class="hljs-symbol">\x</span>03<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>03<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>03<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>01<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>00<span class="hljs-symbol">\x</span>00&#x27; --mask &#x27;<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>fc<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>f8<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff<span class="hljs-symbol">\x</span>ff&#x27;<br></code></pre></td></tr></table></figure>
+<p>然后启动binfmt服务：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">sudo</span> service binfmt-sup<span class="hljs-keyword">port</span> start<br></code></pre></td></tr></table></figure>
+<p>配置i386(32位)内核包：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs llvm">sudo dpkg --<span class="hljs-keyword">add</span>-architecture <span class="hljs-type">i386</span><br>sudo apt update<br>sudo apt install gcc:<span class="hljs-type">i386</span><br></code></pre></td></tr></table></figure>
+<p>这一步很重要，因为实际上是从64位到32位出问题的。一会可以看到结果。</p>
+<p>现在来试试。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">cedar@cedar<span class="hljs-literal">-grandArchive</span>:~/assembly<span class="hljs-variable">$</span> mips<span class="hljs-literal">-sde</span><span class="hljs-literal">-elf</span><span class="hljs-operator">-as</span> <span class="hljs-literal">-mips32</span> inst_rom.S <span class="hljs-literal">-o</span> inst_rom.o<br>cedar@cedar<span class="hljs-literal">-grandArchive</span>:~/assembly<span class="hljs-variable">$</span> <span class="hljs-built_in">ls</span><br>inst_rom.S  inst_rom.o<br></code></pre></td></tr></table></figure>
+<p>非常nice.</p>
+<p>试试把i386 support关了，然后再来一次；</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs groovy">cedar<span class="hljs-meta">@cedar</span>-<span class="hljs-attr">grandArchive:</span>~/assembly$ sudo service binfmt-support stop<br>[sudo] password <span class="hljs-keyword">for</span> <span class="hljs-attr">cedar:</span><br> * Disabling additional executable binary formats binfmt-support                                                 [ OK ]<br>cedar<span class="hljs-meta">@cedar</span>-<span class="hljs-attr">grandArchive:</span>~/assembly$ mips-sde-elf-<span class="hljs-keyword">as</span> -mips32 inst_rom.S -o inst_rom.o<br>-<span class="hljs-attr">bash:</span> <span class="hljs-regexp">/home/</span>cedar<span class="hljs-regexp">/GNUworkfile/</span>mips<span class="hljs-number">-2014.05</span><span class="hljs-regexp">/bin/</span>mips-sde-elf-<span class="hljs-attr">as:</span> cannot execute binary <span class="hljs-attr">file:</span> Exec format error<br></code></pre></td></tr></table></figure>
+<p>和预期一致。</p>
+<h1 id="缺少32位库"><a href="#缺少32位库" class="headerlink" title="缺少32位库"></a>缺少32位库</h1><p>当然你还有可能出现这种情况：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">/lib/ld-linux.<span class="hljs-keyword">so</span>.<span class="hljs-number">2</span>: <span class="hljs-keyword">bad</span> ELF interpreter: No such <span class="hljs-keyword">file</span> <span class="hljs-built_in">or</span> directory<br></code></pre></td></tr></table></figure>
+<p>这个报错是因为缺少ld-linux.so.2引起的，如果是用ubuntu的话可以用apt-get来安装。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">apt-<span class="hljs-builtin-name">get</span> update<br>apt-<span class="hljs-builtin-name">get</span> install ia32-libs<br></code></pre></td></tr></table></figure>
+<p>这样就搞定了。nice job!</p>
 
             </div>
             <hr>
@@ -246,7 +244,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/essay/">essay</a>
+                      <a class="hover-with-bg" href="/categories/techtips/">techtips</a>
                     
                   </div>
                 
@@ -254,7 +252,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/whimsical/">whimsical</a>
+                      <a class="hover-with-bg" href="/tags/Awareness/">Awareness</a>
                     
                   </div>
                 
@@ -265,18 +263,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/13/Tech-%E5%9C%A8wsl%E4%B8%8A%E6%90%AD%E5%BB%BAMIPS%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Tech::在wsl上搭建MIPS交叉编译环境</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/01/essay-Celeste/">
-                        <span class="hidden-mobile">Essay::”蔚蓝“（celeste）的山</span>
+                      <a href="/2021/02/12/note-%E5%BA%9A%E5%AD%90%E5%A4%87%E5%BF%98%E5%BD%95/">
+                        <span class="hidden-mobile">Note::庚子备忘录</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -295,8 +287,8 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
       var disqus_config = function() {
-        this.page.url = 'http://cedard.tk/2021/02/12/note-%E5%BA%9A%E5%AD%90%E5%A4%87%E5%BF%98%E5%BD%95/';
-        this.page.identifier = '/2021/02/12/note-%E5%BA%9A%E5%AD%90%E5%A4%87%E5%BF%98%E5%BD%95/';
+        this.page.url = 'http://cedard.tk/2021/02/13/Tech-%E5%9C%A8wsl%E4%B8%8A%E6%90%AD%E5%BB%BAMIPS%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/';
+        this.page.identifier = '/2021/02/13/Tech-%E5%9C%A8wsl%E4%B8%8A%E6%90%AD%E5%BB%BAMIPS%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/';
       };
       Fluid.utils.waitElementVisible('disqus_thread', function () {
         var d = document, s = d.createElement('script');
