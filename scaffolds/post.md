@@ -1,5 +1,9 @@
 ---
 title: {{ title }}
 date: {{ date }}
-tags:
+tags: 
+comment: 
+category: Excerption
+banner_img: 
+index_img: 
 ---
