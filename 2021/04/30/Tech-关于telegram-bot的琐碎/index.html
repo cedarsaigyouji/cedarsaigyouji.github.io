@@ -1,0 +1,501 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" type="image/png" href="/img/favicon.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="真理位於大炮的射程範圍内">
+  <meta name="author" content="雾杉cedar">
+  <meta name="keywords" content="">
+  <title>Tech::关于telegram bot的琐碎 - 四方喫茶舘</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"cedard.tk","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>四方喫茶舘</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/defaultbg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Tech::关于telegram bot的琐碎">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-30 01:41" pubdate>
+        April 30, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Tech::关于telegram bot的琐碎</h1>
+            
+            <div class="markdown-body">
+              <p>前因：</p>
+<blockquote>
+<p>Patchy<br>隔壁之前有人弄个单纯随机复读的</p>
+<p>Patchy<br>已经通过了群友的人类认可</p>
+<p>Cedar<br>就是听了您的那个，觉得很有意思</p>
+<p>Cedar<br>所以手撸了一个</p>
+</blockquote>
+<hr>
+<p>笑死，根本笑不死。</p>
+<p>俺敲代码从来没有一个目标的，因为我就是门外汉（自豪）</p>
+<p>之前听群友说，隔壁群曾经出了一个bot，是不是复读群友消息结果没有人发现这玩意是bot，我直接宣布这个bot通过图灵测试（迫真）</p>
+<p>所以说，自己想搞一个自己的版本，不仅能复读，还能有其他生草功能。顺便一窥telegram的bot是怎么实现的。</p>
+<h1 id="bot的出生"><a href="#bot的出生" class="headerlink" title="bot的出生"></a>bot的出生</h1><p>bot是从bot中生出来的，<strong>生殖隔离确认</strong></p>
+<p>这个生bot的bot是telegram的一个官方bot，名叫<a target="_blank" rel="noopener" href="https://t.me/BotFather">@botfather</a> .管生bot的人叫father无论如何都很奇怪吧。</p>
+<p>当你向他输入/newbot指令的时候，一个bot的诞生就开始了。跟随他的指令，命名你的新bot。你输入的名字将会成为这个bot的用户名。</p>
+<p>当bot生成之后，你可以通过/mybots来查看或者编辑这个bot的相关信息。</p>
+<p>最重要的是，botfather在创建完这个bot之后，会给予一个独一无二的identifier,那就是这个bot的token。只有在token对应的时候，你才可以指挥你的bot。</p>
+<h1 id="pytelegrambot相关"><a href="#pytelegrambot相关" class="headerlink" title="pytelegrambot相关"></a>pytelegrambot相关</h1><p>我是用pytelegrambot这个库写的，这个库十分优雅而强大，足够应付所有你想实现的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install pyTelegramBotAPI<br></code></pre></td></tr></table></figure>
+<p>安装方法如上。当你安装好了之后，新建一个python文件，在顶部写上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> telebot<br><br>bot = telebot.TeleBot(<span class="hljs-string">&quot;TOKEN&quot;</span>, parse_mode=<span class="hljs-literal">None</span>)<br></code></pre></td></tr></table></figure>
+<p>这样，bot就以token的形式实例化出来了。</p>
+<p>根据pytelegrambot的官方文件，一个bot的例子是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@bot.message_handler(<span class="hljs-params">commands=[<span class="hljs-string">&#x27;start&#x27;</span>, <span class="hljs-string">&#x27;help&#x27;</span>]</span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send_welcome</span>(<span class="hljs-params">message</span>):</span><br>	bot.reply_to(message, <span class="hljs-string">&quot;Howdy, how are you doing?&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>这里定义了一个函数，对于/start和/help这两个指令，bot将会执行send_welcome这个函数，并发送信息”Howdy, how are you doing?“。</p>
+<p>这里，pytelegrambot提供了一个十分友好的装饰器@bot.message_handler，可以对发给bot的消息进行筛查。查阅源码可知：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">message_handler</span>(<span class="hljs-params">self, commands=<span class="hljs-literal">None</span>, regexp=<span class="hljs-literal">None</span>, func=<span class="hljs-literal">None</span>, content_types=<span class="hljs-literal">None</span>, **kwargs</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    Message handler decorator.</span><br><span class="hljs-string">    This decorator can be used to decorate functions that must handle certain types of messages.</span><br><span class="hljs-string">    All message handlers are tested in the order they were added.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Example:</span><br><span class="hljs-string"></span><br><span class="hljs-string">    bot = TeleBot(&#x27;TOKEN&#x27;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    # Handles all messages which text matches regexp.</span><br><span class="hljs-string">    @bot.message_handler(regexp=&#x27;someregexp&#x27;)</span><br><span class="hljs-string">    def command_help(message):</span><br><span class="hljs-string">        bot.send_message(message.chat.id, &#x27;Did someone call for help?&#x27;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    # Handle all sent documents of type &#x27;text/plain&#x27;.</span><br><span class="hljs-string">    @bot.message_handler(func=lambda message: message.document.mime_type == &#x27;text/plain&#x27;, content_types=[&#x27;document&#x27;])</span><br><span class="hljs-string">    def command_handle_document(message):</span><br><span class="hljs-string">        bot.send_message(message.chat.id, &#x27;Document received, sir!&#x27;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    # Handle all other messages.</span><br><span class="hljs-string">    @bot.message_handler(func=lambda message: True, content_types=[&#x27;audio&#x27;, &#x27;photo&#x27;, &#x27;voice&#x27;, &#x27;video&#x27;, &#x27;document&#x27;, &#x27;text&#x27;, &#x27;location&#x27;, &#x27;contact&#x27;, &#x27;sticker&#x27;])</span><br><span class="hljs-string">    def default_command(message):</span><br><span class="hljs-string">        bot.send_message(message.chat.id, &quot;This is the default command handler.&quot;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    :param commands: Optional list of strings (commands to handle).</span><br><span class="hljs-string">    :param regexp: Optional regular expression.</span><br><span class="hljs-string">    :param func: Optional lambda function. The lambda receives the message to test as the first parameter. It must return True if the command should handle the message.</span><br><span class="hljs-string">    :param content_types: This commands&#x27; supported content types. Must be a list. Defaults to [&#x27;text&#x27;].</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+<p>这个装饰器可以用指令，正则，lamda函数以及内容的方式对发给bot的信息进行筛查，并确定是否执行你所定义的函数。</p>
+<p>但是，当你执行这个python文件，bot并不会启动，这是因为这只是个定义性的代码文件，而并没有让bot跑起来。你需要在结尾加上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">bot.polling()<br></code></pre></td></tr></table></figure>
+<p>这个polling方法可以让这个bot不断监听进入的消息，并按照不同情况执行上文所提到的message handler.但是这个方法实际上有坑；如果说进入的消息过多的话，服务器会认定受到了攻击，并停止这个bot。此时你的python文件会以”远程服务器强制终止了一个现有链接“停止。</p>
+<p>为了避免这种情况的出现，pytelegrambot的api十分贴心地提供了另外一个方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">bot.infinity_polling()<br></code></pre></td></tr></table></figure>
+<p>从这个名字就可以看出来，当polling失败的时候，这个bot会重新建立连接，周而复始。</p>
+<h1 id="what-now"><a href="#what-now" class="headerlink" title="what now?"></a>what now?</h1><p>在了解了这些基本的操作之后，你已经可以写一个复读机bot了。原理十分简单，如果要使复读是随机的话，你只需要求助于random库即可。</p>
+<p>pytelegrambot还提供了其他好用的api，比如说发meme，发图片，甚至是让bot在群组中执行管理员权限，等等。限制你发挥的仅仅是你的想象力。</p>
+<p><a target="_blank" rel="noopener" href="https://t.me/cedar_234_bot">我的bot</a>能做到的事情有，时不时以<em>某种方式</em>复读，时不时发怪图，时不时说怪话。</p>
+<p>你可以尝试和他对话，或者把他丢到某个群里。</p>
+<p>你也可以在<a target="_blank" rel="noopener" href="https://github.com/cedarsaigyouji/nonsense_chat_bot">我的github仓库</a>里面找到这玩意。</p>
+<p>以上。</p>
+<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>对了，你如果要让这个bot一直开着，你就得让这个程序一直开着。如果你只有一台电脑的话，那就意味着你这台电脑没法关机。</p>
+<p>而我直接整了个raspi4b，放在上面就跑这玩意。下次聊聊我还用树莓派干了些什么。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/techtips/">techtips</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/tech/">tech</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/16/Excerpt-%E7%BC%96%E8%AF%91%E7%AC%AC%E4%B8%80%E6%9D%A1MIPS%E6%8C%87%E4%BB%A4/">
+                        <span class="hidden-mobile">Excerpt:: 编译第一条MIPS指令</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://cedard.tk/2021/04/30/Tech-%E5%85%B3%E4%BA%8Etelegram-bot%E7%9A%84%E7%90%90%E7%A2%8E/';
+        this.page.identifier = '/2021/04/30/Tech-%E5%85%B3%E4%BA%8Etelegram-bot%E7%9A%84%E7%90%90%E7%A2%8E/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
