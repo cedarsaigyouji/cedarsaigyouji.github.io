@@ -62,7 +62,7 @@ index_img: /img/raspi.png
 
 ```
 $ssh pi@${ip address}
-pi@192.168.2.173's password:
+pi@${ip address}'s password:
 ```
 
 注意，一定要用pi用户登录。这是raspberry pi os的一个内置用户。用root是无法登录的。
